@@ -1,54 +1,45 @@
 package main
 
 import (
-	"fmt"
-	"math"
-
 	"cantor/pkg/api/user"
+	"database/sql"
+	"fmt"
+	"log"
+
+	_ "github.com/lib/pq"
 )
-
-type geometry interface {
-	area() float64
-	perim() float64
-}
-
-type rect struct {
-	width, height float64
-}
-
-type circle struct {
-	radius float64
-}
-
-func (r rect) area() float64 {
-	return r.width * r.height
-}
-
-func (r rect) perim() float64 {
-	return 2*r.width + 2*r.height
-}
-
-func (c circle) area() float64 {
-	return math.Pi * c.radius * c.radius
-}
-
-func (c circle) perim() float64 {
-	return 2 * math.Pi * c.radius
-}
-
-func measure(g geometry) {
-	fmt.Println(g)
-	fmt.Println(g.area())
-	fmt.Println(g.perim())
-}
 
 func main() {
 
-	r := rect{width: 3, height: 4}
-	c := circle{radius: 5}
+	var (
+		id   int
+		name string
+	)
 
-	measure(r)
-	measure(c)
+	connStr := "postgresql://admin:admin@localhost:5432/cantor?sslmode=disable"
 
 	user.HelloWorld()
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	rows, err := db.Query("SELECT * FROM knowledge_areas")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&id, &name)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(id, name)
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
