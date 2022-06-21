@@ -8,6 +8,6 @@ services:
           POSTGRES_USER: admin 
           POSTGRES_DB: cantor  
         ports: 
-          - 5432
+          - 5432:5432
         volumes: 
           - ./pkg/db/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
