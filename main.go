@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cantor/pkg/api/posts"
+	v1 "cantor/pkg/api"
 	"log"
 	"net/http"
 
@@ -49,9 +49,9 @@ func main() {
 	*/
 
 	r := mux.NewRouter()
-	s := r.PathPrefix("/api").Subrouter()
+	s := r.PathPrefix("/v1").Subrouter()
 
-	posts.AddPostRouters(s)
+	v1.AddRoutes(s)
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 
