@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cantor/pkg/api/user"
+	"cantor/pkg/db"
 	"database/sql"
 	"fmt"
 	"log"
@@ -18,7 +18,9 @@ func main() {
 
 	connStr := "postgresql://admin:admin@localhost:5432/cantor?sslmode=disable"
 
-	user.HelloWorld()
+	db.QueryDB()
+	db.OpenDB()
+
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)

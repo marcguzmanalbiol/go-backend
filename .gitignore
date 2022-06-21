@@ -21,4 +21,6 @@
 # Go workspace file
 go.work
 
+# Idea and Code      
 .vscode
+.idea
