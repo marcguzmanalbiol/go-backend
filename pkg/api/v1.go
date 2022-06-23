@@ -8,7 +8,7 @@ import (
 )
 
 func AddRoutes(router *mux.Router) {
-	postRouter := router.PathPrefix("/posts/").Subrouter()
+	postRouter := router.PathPrefix("/posts").Subrouter()
 	posts.AddPostRouters(postRouter)
 
 	usersRouter := router.PathPrefix("/users").Subrouter()
