@@ -2,6 +2,7 @@ package main
 
 import (
 	v1 "cantor/pkg/api"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -49,9 +50,15 @@ func main() {
 	*/
 
 	r := mux.NewRouter()
-	s := r.PathPrefix("/v1").Subrouter()
+	v1router := r.PathPrefix("/v1").Subrouter()
 
-	v1.AddRoutes(s)
+	v1.AddRoutes(v1router)
+
+	graphQLrouter := r.PathPrefix("/graphQL").Subrouter()
+
+	graphQLrouter.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("handling graphQL request")
+	}))
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 
