@@ -2,15 +2,17 @@ package users
 
 import (
 	"fmt"
-	"net/http"
-
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
-func AddUsersRouters(r *mux.Router) {
-	r.HandleFunc("/", HelloWorld)
-}
+func AddUsersRouters(router *mux.Router) {
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Hello World!")
+	})
 
-func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Hello World!")
+	router.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
+		todos := getAllTodos()
+		fmt.Println(todos)
+	})
 }
