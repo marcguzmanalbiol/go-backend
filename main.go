@@ -22,9 +22,9 @@ func main() {
 
 	v1.AddRoutes(v1router)
 
-	graphQLrouter := r.PathPrefix("/graphQL").Subrouter()
+	graphqlRouter := r.PathPrefix("/graphQL").Subrouter()
 
-	graphQLrouter.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	graphqlRouter.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("handling graphQL request")
 	}))
 
