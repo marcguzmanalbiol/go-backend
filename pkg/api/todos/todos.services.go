@@ -1,4 +1,4 @@
-package users
+package todos
 
 import (
 	"cantor/pkg/db"

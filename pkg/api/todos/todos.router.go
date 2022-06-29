@@ -1,4 +1,4 @@
-package users
+package todos
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func AddUsersRouters(router *mux.Router) {
+func AddTodosRouters(router *mux.Router) {
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Hello World!")
 	})

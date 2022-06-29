@@ -15,8 +15,6 @@ func main() {
 
 	db.OpenDB()
 
-	/* ROUTER */
-
 	r := mux.NewRouter()
 	v1router := r.PathPrefix("/v1").Subrouter()
 

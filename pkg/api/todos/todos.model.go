@@ -1,4 +1,4 @@
-package users
+package todos
 
 type todo struct {
 	id      int
